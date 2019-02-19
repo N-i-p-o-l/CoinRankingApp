@@ -6,18 +6,26 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.android.coinranking.core.functional.Result
 import com.android.coinranking.core.functional.catching
+import com.android.coinranking.core.network.CoinService
 import com.android.coinranking.features.coins.Coin
 import com.android.coinranking.features.coins.CoinRepository
 import javax.inject.Inject
 
 class CoinDataSource
 @Inject constructor(private val coinDao: CoinDao,
+                    private val coinService: CoinService,
                     private val coinDtoMapper: CoinDtoMapper): CoinRepository {
-  override suspend fun getAllCoins(): Result<List<Coin>> {
+  override suspend fun getLocalCoins(): Result<List<Coin>> {
     return catching {
-      //ToDo get data from network
       val dbList = coinDao.getAllCoins().let(coinDtoMapper::mapList)
       dbList
+    }
+  }
+
+  override suspend fun updateCoins(): Result<List<Coin>> {
+    return catching {
+      val ntList = coinService.getCoins().await()
+      ntList.data.coins
     }
   }
 
@@ -27,8 +35,8 @@ class CoinDataSource
   override suspend fun deleteCoinById(id: String) =
     catching { coinDao.deleteCoinById(id) }
 
-  override suspend fun addCoins(vararg coin: Coin) =
-    catching { coin.map(coinDtoMapper::mapReverse).let(coinDao::addCoins) }
+  override suspend fun addCoins(coins: List<Coin>) =
+    catching { coins.map(coinDtoMapper::mapReverse).let(coinDao::addCoins) }
 }
 
 @Dao interface CoinDao {

@@ -17,6 +17,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+        buildConfigField "String", "API_ENDPOINT", '"https://api.coinranking.com/v1/public/"'
     }
 
     signingConfigs {
@@ -100,8 +101,12 @@ dependencies {
     implementation DIDependencies.dagger
     kapt DIDependencies.daggerCompiler
 
-    // Third Party
-    implementation ThirdPartyDependencies.gson
+    // Square
+    implementation SquareDependencies.retrofit2
+    implementation SquareDependencies.converterGson
+    implementation SquareDependencies.okHttp
+    implementation SquareDependencies.okHttpInterceptor
+    implementation SquareDependencies.coroutinesAdapter
 
     // Testing
     testImplementation TestDependencies.junit

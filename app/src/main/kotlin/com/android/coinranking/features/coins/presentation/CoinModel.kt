@@ -6,8 +6,8 @@ import com.android.coinranking.features.coins.Coin
 import javax.inject.Inject
 
 data class CoinModel(val id: Long,
-                     val name: String, val description: String,
-                     val iconUrl: String, val price: String): BaseViewType {
+                     val name: String, val description: String?,
+                     val iconUrl: String?, val price: String): BaseViewType {
   companion object {
     @JvmStatic val VIEW_TYPE = CoinModel::class.hashCode()
   }

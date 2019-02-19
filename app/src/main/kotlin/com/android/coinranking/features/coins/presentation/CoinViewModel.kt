@@ -15,14 +15,19 @@ class CoinViewModel @Inject constructor(
   val state by lazy { MutableLiveData<State>() }
 
   fun getAllCoins() {
-    start {
-      val coins = callInBackground {
-        coinRepository.getAllCoins().mapCatching { it.let(coinModelMapper::mapList) }
+      startInBackground {
+        val localCoins = coinRepository.getLocalCoins().mapCatching { it.let(coinModelMapper::mapList) }
+        checkState(localCoins)
+
+        val coins = coinRepository.updateCoins().mapCatching { it.let(coinModelMapper::mapList) }
+        checkState(coins)
       }
-      when {
-        coins is Success -> showCoins(coins.value)
-        coins is Failure -> handleError(coins.error)
-      }
+  }
+
+  private fun checkState(coins: Result<List<CoinModel>>) {
+    when {
+      coins is Success -> showCoins(coins.value)
+      coins is Failure -> handleError(coins.error)
     }
   }
 
