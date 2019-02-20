@@ -1,7 +1,7 @@
 object Versions {
-  const val gradlePluginVersion = "3.3.0"
   const val kotlinVersion = "1.3.20"
   const val jacocoVersion = "0.8.1"
+  const val gradlePluginVersion = "3.3.0"
 
   const val minSdkVersion = 21
   const val targetSdkVersion = 28

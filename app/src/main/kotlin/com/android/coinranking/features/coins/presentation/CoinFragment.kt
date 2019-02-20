@@ -1,10 +1,11 @@
 package com.android.coinranking.features.coins.presentation
 
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.android.coinranking.R
 import com.android.coinranking.core.extension.error
 import com.android.coinranking.core.extension.observe
-import com.android.coinranking.core.extension.withLinearLayoutManager
 import com.android.coinranking.core.platform.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_coin.*
 
@@ -31,7 +32,10 @@ class CoinFragment: BaseFragment() {
 
   override var layoutID = R.layout.fragment_coin
   override fun init() {
-    setupRecyclerView()
+    fragment_coin_recycle.setHasFixedSize(true)
+    fragment_coin_recycle.layoutManager = LinearLayoutManager(
+      activity, RecyclerView.VERTICAL, false)
+
     coinViewModel.getAllCoins()
   }
 
@@ -41,14 +45,12 @@ class CoinFragment: BaseFragment() {
     }
   }
 
-  private fun showCoins(state: CoinViewModel.State.ShowList) {}
+  private fun showCoins(state: CoinViewModel.State.ShowList) {
+    fragment_coin_recycle.adapter = CoinAdapter(state.coins)
+  }
 
   override fun handleError(error: Throwable) {
     super.handleError(error)
     //ToDo show error view
-  }
-
-  private fun setupRecyclerView() {
-    fragment_coin_recycle.withLinearLayoutManager()
   }
 }

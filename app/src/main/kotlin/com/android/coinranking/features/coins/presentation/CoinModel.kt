@@ -1,19 +1,12 @@
 package com.android.coinranking.features.coins.presentation
 
 import com.android.coinranking.core.functional.Mapper
-import com.android.coinranking.core.platform.base.BaseViewType
 import com.android.coinranking.features.coins.Coin
 import javax.inject.Inject
 
 data class CoinModel(val id: Long,
                      val name: String, val description: String?,
-                     val iconUrl: String?, val price: String): BaseViewType {
-  companion object {
-    @JvmStatic val VIEW_TYPE = CoinModel::class.hashCode()
-  }
-
-  override fun getViewType() = VIEW_TYPE
-}
+                     val iconUrl: String?, val price: String)
 
 class CoinModelMapper @Inject constructor(): Mapper<Coin, CoinModel> {
   override fun map(param: Coin): CoinModel = with(param) {
