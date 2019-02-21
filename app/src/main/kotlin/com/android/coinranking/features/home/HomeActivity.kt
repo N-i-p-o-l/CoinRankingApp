@@ -23,4 +23,12 @@ class HomeActivity: BaseActivity() {
       .addToBackStack(null)
       .commit()
   }
+
+  fun showProgressUpdate(visible: Int) {
+    activity_home_loading.visibility = visible
+  }
+
+  fun showUpdateError(visible: Int) {
+    activity_home_error.visibility = visible
+  }
 }

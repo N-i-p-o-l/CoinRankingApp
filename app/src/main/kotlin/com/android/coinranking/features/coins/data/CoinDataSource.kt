@@ -25,6 +25,7 @@ class CoinDataSource
   override suspend fun updateCoins(): Result<List<Coin>> {
     return catching {
       val ntList = coinService.getCoins().await()
+      addCoins(ntList.data.coins)
       ntList.data.coins
     }
   }

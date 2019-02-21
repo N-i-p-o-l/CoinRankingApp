@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_error"
+    android:layout_marginBottom="@dimen/d32"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone"
+    tools:visibility="gone">
+
+  <ImageView
+      android:layout_width="@dimen/d64"
+      android:layout_height="@dimen/d64"
+      android:layout_above="@+id/textView1"
+      android:layout_centerHorizontal="true"
+      android:layout_marginBottom="@dimen/d16"
+      app:srcCompat="@drawable/ic_warning_yellow"
+      />
+
+  <TextView
+      android:text="@string/error_label_title"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:id="@+id/textView1"
+      android:layout_centerInParent="true"
+      />
+
+  <ImageView
+      android:id="@+id/layout_error_refresh"
+      android:layout_width="@dimen/d64"
+      android:layout_height="@dimen/d64"
+      android:layout_above="@+id/textView4"
+      android:layout_centerHorizontal="true"
+      app:srcCompat="@drawable/ic_refresh"
+      />
+
+  <TextView
+      android:id="@+id/textView4"
+      android:text="@string/try_again_label"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/d32"
+      android:layout_alignParentBottom="true"
+      android:layout_centerHorizontal="true"
+      />
+</RelativeLayout>
