@@ -27,8 +27,8 @@ class CoinViewModel @Inject constructor(
         checkLocalState(localCoins)
 
         updateLoading.postEvent(Unit)
-        val ntCoins = coinRepository.updateCoins().mapCatching { it.let(coinModelMapper::mapList) }
-        checkNetworkState(ntCoins, localCoins.rightOrNull()?.isEmpty() ?: true)
+        val remoteCoins = coinRepository.updateCoins().mapCatching { it.let(coinModelMapper::mapList) }
+        checkNetworkState(remoteCoins, localCoins.rightOrNull()?.isEmpty() ?: true)
       }
   }
 
