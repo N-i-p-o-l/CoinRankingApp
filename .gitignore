@@ -54,6 +54,7 @@ captures/
 # Android studio
 .idea/*
 *.iml
+projectFilesBackup/
 
 #NDK
 obj/
